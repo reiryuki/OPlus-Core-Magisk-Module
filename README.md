@@ -23,7 +23,7 @@
 - Magisk or KernelSU installed
 
 ## Installation Guide & Download Link
-- Install this module https://www.pling.com/p// via Magisk app or KernelSU app or Recovery if Magisk installed
+- Install this module https://www.pling.com/p/2173439/ via Magisk app or KernelSU app or Recovery if Magisk installed
 - Install any OPlus/OnePlus/realme/OPPO Magisk Module which depends on this module
 - Reboot
 
@@ -37,6 +37,7 @@
 - https://t.me/androidryukimodsdiscussions/2618
 
 ## Tested on
+- Android 13 CrDroid ROM & AlphaDroid ROM
 - Android 14 LineageOS ROM
 
 ## Credits and Contributors
