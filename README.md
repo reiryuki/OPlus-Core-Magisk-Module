@@ -1,8 +1,8 @@
 # OPlus Core Magisk Module
 
 ## DISCLAIMER
-- OPlus blobs are owned by OPlus™.
-- The MIT license specified here is for the Magisk Module only, not for OPlus blobs.
+- OPlus apps and blobs are owned by OPlus™.
+- The MIT license specified here is for the Magisk Module only, not for OPlus apps and blobs.
 
 ## Descriptions
 - System core framework library of  ROM ported from OnePlus 9 Pro (OnePlus9Pro) as a dependency of any OPlus/OnePlus/realme/OPPO Magisk Modules
@@ -16,10 +16,13 @@
 - Do not white list the library with your own Magisk Module /system/etc/permissions/ because there might be a conflict!
 
 ## Sources
-- NOT in OPlus ROM
 - https://dumps.tadiphone.dev/dumps/oneplus/oneplus9pro qssi-user-13-TP1A.220905.001-1698121073735-release-keys--IN
+- https://dumps.tadiphone.dev/dumps/oneplus/op594dl1 qssi-user-14-UKQ1.230924.001-1701915639192-release-keys--US
+- https://dumps.tadiphone.dev/dumps/oneplus/op594dl1 qssi-user-14-UP1A.231005.007-1716868681220-release-keys--IN
+- lib*.so: https://dumps.tadiphone.dev/dumps/oneplus/op535dl1 qssi-user-14-UKQ1.230924.001-1719909745718-release-keys--IN
 
 ## Requirements
+- NOT in OPlus ROM
 - Magisk or KernelSU installed
 
 ## Installation Guide & Download Link
@@ -35,10 +38,6 @@
 
 ## Support & Bug Report
 - https://t.me/androidryukimodsdiscussions/2618
-
-## Tested on
-- Android 13 CrDroid ROM & AlphaDroid ROM
-- Android 14 LineageOS ROM
 
 ## Credits and Contributors
 - https://t.me/androidryukimodsdiscussions
