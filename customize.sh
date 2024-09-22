@@ -3,9 +3,13 @@ ui_print " "
 
 # var
 UID=`id -u`
+[ ! "$UID" ] && UID=0
 LIST32BIT=`grep_get_prop ro.product.cpu.abilist32`
 if [ ! "$LIST32BIT" ]; then
   LIST32BIT=`grep_get_prop ro.system.product.cpu.abilist32`
+fi
+if [ ! "$LIST32BIT" ]; then
+  [ -f /system/lib/libandroid.so ] && LIST32BIT=true
 fi
 
 # log
@@ -70,6 +74,18 @@ if [ "$IS64BIT" == true ]; then
 else
   ui_print "- 32 bit architecture"
   rm -rf `find $MODPATH -type d -name *64*`
+  ui_print " "
+fi
+
+# sdk
+NUM=29
+if [ "$API" -lt $NUM ]; then
+  ui_print "! Unsupported SDK $API."
+  ui_print "  You have to upgrade your Android version"
+  ui_print "  at least SDK $NUM to use this module."
+  abort
+else
+  ui_print "- SDK $API"
   ui_print " "
 fi
 
@@ -184,7 +200,7 @@ if [ "`grep_prop data.cleanup $OPTIONALS`" == 1 ]; then
   ui_print " "
 elif [ -d $DIR ]\
 && [ "$PREVMODNAME" != "$MODNAME" ]; then
-  ui_print "- Different version detected"
+  ui_print "- Different module name is detected"
   ui_print "  Cleaning-up $MODID data..."
   cleanup
   ui_print " "

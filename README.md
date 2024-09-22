@@ -22,6 +22,7 @@
 - lib*.so: https://dumps.tadiphone.dev/dumps/oneplus/op535dl1 qssi-user-14-UKQ1.230924.001-1719909745718-release-keys--IN
 
 ## Requirements
+- Android 9 (SDK 28) and up
 - NOT in OPlus ROM
 - Magisk or KernelSU installed
 
@@ -40,10 +41,11 @@
 - https://t.me/androidryukimodsdiscussions/2618
 
 ## Credits and Contributors
+- @HuskyDG
 - https://t.me/androidryukimodsdiscussions
 - You can contribute ideas about this Magisk Module here: https://t.me/androidappsportdevelopment
 
 ## Sponsors
-- https://t.me/androidryukimodsdiscussions/2619
+- https://t.me/ryukinotes/25
 
 
