@@ -4,12 +4,82 @@ ui_print " "
 # var
 UID=`id -u`
 [ ! "$UID" ] && UID=0
-LIST32BIT=`grep_get_prop ro.product.cpu.abilist32`
-if [ ! "$LIST32BIT" ]; then
-  LIST32BIT=`grep_get_prop ro.system.product.cpu.abilist32`
+FIRARCH=`grep_get_prop ro.bionic.arch`
+SECARCH=`grep_get_prop ro.bionic.2nd_arch`
+ABILIST=`grep_get_prop ro.product.cpu.abilist`
+if [ ! "$ABILIST" ]; then
+  ABILIST=`grep_get_prop ro.system.product.cpu.abilist`
 fi
-if [ ! "$LIST32BIT" ]; then
-  [ -f /system/lib/libandroid.so ] && LIST32BIT=true
+if [ "$FIRARCH" == arm64 ]\
+&& ! echo "$ABILIST" | grep -q arm64-v8a; then
+  if [ "$ABILIST" ]; then
+    ABILIST="$ABILIST,arm64-v8a"
+  else
+    ABILIST=arm64-v8a
+  fi
+fi
+if [ "$FIRARCH" == x64 ]\
+&& ! echo "$ABILIST" | grep -q x86_64; then
+  if [ "$ABILIST" ]; then
+    ABILIST="$ABILIST,x86_64"
+  else
+    ABILIST=x86_64
+  fi
+fi
+if [ "$SECARCH" == arm ]\
+&& ! echo "$ABILIST" | grep -q armeabi; then
+  if [ "$ABILIST" ]; then
+    ABILIST="$ABILIST,armeabi"
+  else
+    ABILIST=armeabi
+  fi
+fi
+if [ "$SECARCH" == arm ]\
+&& ! echo "$ABILIST" | grep -q armeabi-v7a; then
+  if [ "$ABILIST" ]; then
+    ABILIST="$ABILIST,armeabi-v7a"
+  else
+    ABILIST=armeabi-v7a
+  fi
+fi
+if [ "$SECARCH" == x86 ]\
+&& ! echo "$ABILIST" | grep -q x86; then
+  if [ "$ABILIST" ]; then
+    ABILIST="$ABILIST,x86"
+  else
+    ABILIST=x86
+  fi
+fi
+ABILIST32=`grep_get_prop ro.product.cpu.abilist32`
+if [ ! "$ABILIST32" ]; then
+  ABILIST32=`grep_get_prop ro.system.product.cpu.abilist32`
+fi
+if [ "$SECARCH" == arm ]\
+&& ! echo "$ABILIST32" | grep -q armeabi; then
+  if [ "$ABILIST32" ]; then
+    ABILIST32="$ABILIST32,armeabi"
+  else
+    ABILIST32=armeabi
+  fi
+fi
+if [ "$SECARCH" == arm ]\
+&& ! echo "$ABILIST32" | grep -q armeabi-v7a; then
+  if [ "$ABILIST32" ]; then
+    ABILIST32="$ABILIST32,armeabi-v7a"
+  else
+    ABILIST32=armeabi-v7a
+  fi
+fi
+if [ "$SECARCH" == x86 ]\
+&& ! echo "$ABILIST32" | grep -q x86; then
+  if [ "$ABILIST32" ]; then
+    ABILIST32="$ABILIST32,x86"
+  else
+    ABILIST32=x86
+  fi
+fi
+if [ ! "$ABILIST32" ]; then
+  [ -f /system/lib/libandroid.so ] && ABILIST32=true
 fi
 
 # log
@@ -59,22 +129,41 @@ else
 fi
 ui_print " "
 
-# bit
-if [ "$IS64BIT" == true ]; then
-  ui_print "- 64 bit architecture"
+# architecture
+if [ "$ABILIST" ]; then
+  ui_print "- $ABILIST architecture"
   ui_print " "
-  if [ "$LIST32BIT" ]; then
-    ui_print "- 32 bit library support"
+fi
+NAME=arm64-v8a
+NAME2=armeabi-v7a
+if ! echo "$ABILIST" | grep -Eq "$NAME|$NAME2"; then
+  if [ "$BOOTMODE" == true ]; then
+    ui_print "! This ROM doesn't support $NAME"
+    ui_print "  nor $NAME2 architecture"
   else
-    ui_print "- Doesn't support 32 bit library"
-    rm -rf $MODPATH/armeabi-v7a $MODPATH/x86\
-     $MODPATH/system*/lib $MODPATH/system*/vendor/lib
+    ui_print "! This Recovery doesn't support $NAME"
+    ui_print "  nor $NAME2 architecture"
+    ui_print "  Try to install via Magisk app instead"
   fi
-  ui_print " "
-else
-  ui_print "- 32 bit architecture"
-  rm -rf `find $MODPATH -type d -name *64*`
-  ui_print " "
+  rm -rf $MODPATH/system*/lib*\
+   $MODPATH/system*/vendor/lib*
+fi
+if ! echo "$ABILIST" | grep -q $NAME; then
+  rm -rf `find $MODPATH/system -type d -name *64*`
+  if [ "$BOOTMODE" != true ]; then
+    ui_print "! This Recovery doesn't support $NAME architecture"
+    ui_print "  Try to install via Magisk app instead"
+    ui_print " "
+  fi
+fi
+if ! echo "$ABILIST" | grep -q $NAME2; then
+  rm -rf $MODPATH/system*/lib\
+   $MODPATH/system*/vendor/lib
+  if [ "$BOOTMODE" != true ]; then
+    ui_print "! This Recovery doesn't support $NAME2 architecture"
+    ui_print "  Try to install via Magisk app instead"
+    ui_print " "
+  fi
 fi
 
 # sdk
@@ -155,7 +244,7 @@ if [ "$IS64BIT" == true ]; then
   FILES=`for LIST in $LISTS; do echo /lib64/$LIST; done`
   file_check_vendor
 fi
-if [ "$LIST32BIT" ]; then
+if [ "$ABILIST32" ]; then
   LISTS=`ls $MODPATH/system/lib`
   FILES=`for LIST in $LISTS; do echo /lib/$LIST; done`
   file_check_system
