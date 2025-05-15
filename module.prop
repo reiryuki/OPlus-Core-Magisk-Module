@@ -1,7 +1,7 @@
 id=OPlusCore
 name=OPlus Core
-version=v0.8
-versionCode=8
+version=v0.9
+versionCode=9
 author=Rei Ryuki the Fixer
 description=System core framework library of OPlus ROM ported from OnePlus 9 Pro (OnePlus9Pro) as a dependency of any OPlus/OnePlus/realme/OPPO Magisk Modules for any Android 9 (SDK 28) and up non-OPlus ROM.
 
