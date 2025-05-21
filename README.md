@@ -8,11 +8,11 @@
 - System core framework library of  ROM ported from OnePlus 9 Pro (OnePlus9Pro) as a dependency of any OPlus/OnePlus/realme/OPPO Magisk Modules
 
 ## For OPlus Apps Porter
-- You need to declare this line bellow in your app AndroidManifest.xml after `<application />` to use this OPlus Core:
+- You need to declare this line bellow in your app AndroidManifest.xml at `<application />` to use this OPlus Core:
 
   `<uses-library android:name="oplus" android:required="false" />`
 
-- Do not do above if your app have it's own library!
+- Do not do above if your app has it's own library!
 - Do not white list the library with your own Magisk Module /system/etc/permissions/ because there might be a conflict!
 
 ## Sources
