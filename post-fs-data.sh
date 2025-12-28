@@ -5,6 +5,9 @@ MODPATH=${0%/*}
 exec 2>$MODPATH/debug-pfsd.log
 set -x
 
+# var
+API=`getprop ro.build.version.sdk`
+
 # permission
 if [ "$API" -ge 26 ]; then
   DIRS=`find $MODPATH/vendor\

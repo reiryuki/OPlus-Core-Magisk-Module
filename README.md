@@ -24,10 +24,10 @@
 ## Requirements
 - Android 9 (SDK 28) and up
 - NOT in OPlus ROM
-- Magisk or KernelSU installed
+- Magisk or Kitsune Mask or KernelSU or Apatch installed
 
 ## Installation Guide & Download Link
-- Install this module https://www.pling.com/p/2173439/ via Magisk app or KernelSU app or Recovery if Magisk installed
+- Install this module https://www.pling.com/p/2173439/ via Magisk app or Kitsune Mask app or KernelSU app or Apatch app or Recovery if Magisk or Kitsune Mask installed
 - Install any OPlus/OnePlus/realme/OPPO Magisk Module which depends on this module
 - Reboot
 
