@@ -27,6 +27,7 @@
 - Magisk or Kitsune Mask or KernelSU or Apatch installed
 
 ## Installation Guide & Download Link
+- If you are using KernelSU, you need to disable Unmount Modules by Default in KernelSU app settings and install https://github.com/KernelSU-Modules-Repo/meta-overlayfs first
 - Install this module https://www.pling.com/p/2173439/ via Magisk app or Kitsune Mask app or KernelSU app or Apatch app or Recovery if Magisk or Kitsune Mask installed
 - Install any OPlus/OnePlus/realme/OPPO Magisk Module which depends on this module
 - Reboot

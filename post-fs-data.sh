@@ -7,6 +7,10 @@ set -x
 
 # var
 API=`getprop ro.build.version.sdk`
+if [ ! -d $MODPATH/vendor ]\
+|| [ -L $MODPATH/vendor ]; then
+  MODSYSTEM=/system
+fi
 
 # permission
 if [ "$API" -ge 26 ]; then
@@ -16,12 +20,7 @@ if [ "$API" -ge 26 ]; then
     chown 0.2000 $DIR
   done
   chcon -R u:object_r:system_lib_file:s0 $MODPATH/system/lib*
-  if [ -L $MODPATH/system/vendor ]\
-  && [ -d $MODPATH/vendor ]; then
-    chcon -R u:object_r:vendor_file:s0 $MODPATH/vendor
-  else
-    chcon -R u:object_r:vendor_file:s0 $MODPATH/system/vendor
-  fi
+  chcon -R u:object_r:vendor_file:s0 $MODPATH$MODSYSTEM/vendor
 fi
 
 # directory 
